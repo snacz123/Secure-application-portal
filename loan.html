@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Loan Application</title>
+
+<style>
+body {
+    font-family: Arial;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+.container {
+    background: white;
+    padding: 25px;
+    margin: 60px auto;
+    width: 320px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+input {
+    width: 92%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: #e60000;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #cc0000;
+}
+</style>
+
+<script>
+function submitForm() {
+    alert("Server Error! Please try again later.");
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+<h2>Loan Application Form</h2>
+
+<input type="text" placeholder="Full Name"><br>
+<input type="text" placeholder="PAN Number"><br>
+<input type="text" placeholder="Aadhaar Number"><br>
+<input type="text" placeholder="Bank Account Number"><br>
+<input type="number" placeholder="Loan Amount"><br>
+
+<button onclick="submitForm()">Submit Application</button>
+
+</div>
+
+</body>
+</html>
