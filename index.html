@@ -1,53 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Application Form</title>
+<title>USDTETF.01</title>
 <style>
 body{
   font-family: Arial;
-  background:#f2f2f2;
+  background:#eef2f7;
   text-align:center;
 }
 .container{
   background:white;
-  width:380px;
+  width:400px;
   margin:60px auto;
-  padding:25px;
+  padding:30px;
   border-radius:12px;
-  box-shadow:0 0 15px rgba(0,0,0,0.2);
+  box-shadow:0 0 20px rgba(0,0,0,0.15);
+}
+h1{
+  margin-bottom:5px;
+}
+.brand{
+  font-size:14px;
+  color:gray;
+  margin-bottom:20px;
 }
 input, select{
-  width:90%;
+  width:92%;
   padding:10px;
   margin:8px 0;
 }
 button{
-  width:95%;
+  width:96%;
   padding:12px;
-  background:#007bff;
+  background:#0a58ca;
   color:white;
   border:none;
   border-radius:6px;
   font-size:16px;
+  cursor:pointer;
 }
 button:hover{
-  background:#0056b3;
+  background:#084298;
 }
-#loading{
+.progress-container{
+  width:100%;
+  background:#ddd;
+  border-radius:5px;
+  margin-top:15px;
   display:none;
-  color:red;
-  font-weight:bold;
-  margin-top:10px;
 }
+.progress-bar{
+  height:20px;
+  width:0%;
+  background:#0a58ca;
+  border-radius:5px;
+  color:white;
+  font-size:12px;
+}
+#status{
+  margin-top:10px;
+  font-weight:bold;
+}
+.success{ color:green; }
+.processing{ color:#0a58ca; }
 </style>
 
 <script>
 function submitForm(){
-  document.getElementById("loading").style.display="block";
-  setTimeout(function(){
-    alert("Server Error! Please try again later.");
-    document.getElementById("loading").style.display="none";
-  },10000);
+  let progress = 0;
+  let bar = document.getElementById("bar");
+  let container = document.getElementById("progressContainer");
+  let status = document.getElementById("status");
+
+  document.querySelector("button").disabled = true;
+  container.style.display="block";
+  status.className="processing";
+  status.innerHTML="Processing request...";
+
+  let interval = setInterval(function(){
+    progress++;
+    bar.style.width = progress + "%";
+    bar.innerHTML = progress + "%";
+
+    if(progress >= 100){
+      clearInterval(interval);
+      status.className="success";
+      status.innerHTML="✔ Form Submitted<br>Status: Processing Complete";
+      document.querySelector("button").disabled = false;
+    }
+  },1200); // around 2 minutes total
 }
 </script>
 
@@ -57,7 +98,8 @@ function submitForm(){
 
 <div class="container">
 
-<h2>Application Form</h2>
+<h1>USDTETF.01</h1>
+<div class="brand">Secure Application Portal</div>
 
 <input type="text" placeholder="PAN Number">
 <input type="text" placeholder="Aadhaar Number">
@@ -73,17 +115,21 @@ function submitForm(){
 
 <select>
 <option>Select Amount</option>
-<option>₹1,00,000</option>
-<option>₹2,00,000</option>
-<option>₹3,00,000</option>
-<option>₹4,00,000</option>
-<option>₹5,00,000</option>
-<option>₹6,00,000</option>
+<option>1 - 1.5 L</option>
+<option>2 - 2.5 L</option>
+<option>3 - 3.5 L</option>
+<option>4 - 4.5 L</option>
+<option>5 - 5.5 L</option>
+<option>6 L</option>
 </select>
 
 <button onclick="submitForm()">Submit</button>
 
-<p id="loading">Processing... Please wait...</p>
+<div class="progress-container" id="progressContainer">
+  <div class="progress-bar" id="bar"></div>
+</div>
+
+<p id="status"></p>
 
 </div>
 
